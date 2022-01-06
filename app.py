@@ -8,13 +8,13 @@ import pandas as pd
 
 ########### Define your variables ######
 
-tabtitle = 'Old McDonald'
+tabtitle = 'Top Tv Shows 2021'
 sourceurl = 'https://plot.ly/python/choropleth-maps/'
 githublink = 'https://github.com/austinlasseter/agriculture-exports-map'
 # here's the list of possible columns to choose from.
-list_of_columns =['total exports', 'beef', 'pork', 'poultry',
-       'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
-       'veggies proc', 'total veggies', 'corn', 'wheat', 'cotton']
+list_of_columns =['Superstore', 'Maid', 'Ginny & Georgia', 'Modern Family',
+       'Gilmore Girls', 'You', 'Emily in Paris', 'Schitts Creek', 'Jane the Virgin',
+       'Grace and Frankie', 'Narcos', 'Ozark', 'Dead to Me', 'Greys Anatomy']
 
 
 ########## Set up the chart
@@ -31,14 +31,14 @@ app.title=tabtitle
 ########### Set up the layout
 
 app.layout = html.Div(children=[
-    html.H1('2011 Agricultural Exports, by State'),
+    html.H1('Mostly Watched TV Shows by State'),
     html.Div([
         html.Div([
-                html.H6('Select a variable for analysis:'),
+                html.H6('Select a tv show for analysis:'),
                 dcc.Dropdown(
                     id='options-drop',
                     options=[{'label': i, 'value': i} for i in list_of_columns],
-                    value='corn'
+                    value='Dead to Me'
                 ),
         ], className='two columns'),
         html.Div([dcc.Graph(id='figure-1'),
@@ -55,9 +55,9 @@ app.layout = html.Div(children=[
 @app.callback(Output('figure-1', 'figure'),
              [Input('options-drop', 'value')])
 def make_figure(varname):
-    mygraphtitle = f'Exports of {varname} in 2011'
+    mygraphtitle = f'Television show {varname} mostly watched in 2021'
     mycolorscale = 'ylorrd' # Note: The error message will list possible color scales.
-    mycolorbartitle = "Millions USD"
+    mycolorbartitle = "Population in Millions"
 
     data=go.Choropleth(
         locations=df['code'], # Spatial coordinates
